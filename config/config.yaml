@@ -1,0 +1,12 @@
+logLevel: error
+logFormat: json
+route:
+  routes:
+  - drop:
+    - type: Normal
+    match:
+    - receiver: dump
+receivers:
+- name: dump
+  file:
+    path: /dev/stdout
