@@ -13,6 +13,9 @@ spec:
         app.kubernetes.io/name: event-exporter
     spec:
       serviceAccountName: event-exporter
+      securityContext:
+        runAsUser: 65532
+        runAsGroup: 65532
       containers:
       - name: event-exporter
         image: opsgenie/kubernetes-event-exporter:0.8
@@ -22,6 +25,13 @@ spec:
         volumeMounts:
         - name: data
           mountPath: /data
+          readOnly: true
+        resources:
+          requests:
+            cpu: 100m
+            memory: 50Mi
+          limits:
+            memory: 500Mi
       volumes:
         - name: data
           configMap:
